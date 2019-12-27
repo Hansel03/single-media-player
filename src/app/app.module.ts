@@ -9,9 +9,10 @@ import { VgBufferingModule } from "videogular2/compiled/buffering";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { NoRightClickDirective } from "./directives/no-right-click.directive";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NoRightClickDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
