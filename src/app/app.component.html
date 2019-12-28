@@ -1,4 +1,4 @@
-<vg-player appNoRightClick>
+<vg-player appNoRightClick (onPlayerReady)="onPlayerReady($event)">
     <vg-overlay-play></vg-overlay-play>
     <vg-buffering></vg-buffering>
 
@@ -7,7 +7,7 @@
         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
     </vg-scrub-bar>
 
-    <vg-controls>
+    <vg-controls [vgAutohide]="true">
         <vg-play-pause></vg-play-pause>
         <vg-playback-button></vg-playback-button>
 
