@@ -1,15 +1,15 @@
-<vg-player appNoRightClick (onPlayerReady)="onPlayerReady($event)">
+<vg-player (onPlayerReady)="onPlayerReady($event)">
     <vg-overlay-play></vg-overlay-play>
     <vg-buffering></vg-buffering>
 
     <vg-scrub-bar>
-        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-current-time [vgSlider]="true"></vg-scrub-bar-current-time>
         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
     </vg-scrub-bar>
 
     <vg-controls [vgAutohide]="true">
         <vg-play-pause></vg-play-pause>
-        <vg-playback-button></vg-playback-button>
+        <vg-playback-button [playbackValues]="['0.5', '1.0', '2.0', '3.0', '4.0']"></vg-playback-button>
 
         <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
         <span class="sepration-time">/</span>
@@ -17,8 +17,8 @@
         <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
 
         <!-- <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display> -->
-
-
+        <vg-quality-selector [bitrates]="dashBitrates" (onBitrateChange)="vgDash.setBitrate($event)">
+        </vg-quality-selector>
         <vg-track-selector></vg-track-selector>
         <vg-mute></vg-mute>
         <vg-volume></vg-volume>
@@ -26,15 +26,19 @@
         <vg-fullscreen></vg-fullscreen>
     </vg-controls>
 
-    <video [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
-    <source src="https://res.cloudinary.com/hansel/video/upload/v1577482906/test.mp4" type="video/mp4">
-    <source src="http://static.videogular.com/assets/videos/videogular.ogg" type="video/ogg">
-    <source src="https://res.cloudinary.com/demo/video/upload/q_auto,vc_vp9/ilg9f3xnzytgyo23meo1.webm"
-      type="video/webm">
-
-    <track kind="subtitles" label="English" src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt"
-      srclang="en" default>
-    <track kind="subtitles" label="Español" src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
-      srclang="es">
+    <video data-dashjs-player #media #vgDash="vgDash" [vgMedia]="media" [vgDash]="currentStream" [vgHls]="currentStream" (onGetBitrates)="dashBitrates = $event" id="singleVideo" preload="auto" crossorigin>
+    <track
+      kind="subtitles"
+      label="English"
+      src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt"
+      srclang="en"
+      default
+    />
+    <track
+      kind="subtitles"
+      label="Español"
+      src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
+      srclang="es"
+    />
   </video>
 </vg-player>

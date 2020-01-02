@@ -11,6 +11,9 @@ import { Subscription } from "rxjs/internal/Subscription";
 export class AppComponent implements OnInit, OnDestroy {
   preload: string;
   api: VgAPI;
+  dashBitrates: any[];
+  currentStream =
+    "https://res.cloudinary.com/hansel/video/upload/v1577830074/demo-video-hd.mp4";
 
   subscriptions: Subscription[] = [];
 
@@ -53,6 +56,11 @@ export class AppComponent implements OnInit, OnDestroy {
       );
       console.log(this.api.getDefaultMedia().currentTime);
     });
+  }
+
+  onGetBitrates($event) {
+    // Manipalute $event and add your labels
+    this.dashBitrates = $event;
   }
 
   ngOnDestroy() {
